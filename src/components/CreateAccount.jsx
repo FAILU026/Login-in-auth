@@ -230,31 +230,32 @@ const CreateAccount = () => {
             <div className="flex items-center text-sm text-[rgb(85,85,85)]">
             <button
                 type="button"
-                className="w-4 h-4 flex focus:outline-none"
+                className="w-4 h-4 flex   focus:outline-none"
                 onClick={() => setIsChecked(!isChecked)}
               >
                 <img alt="checkbox" src={isChecked ? select : unselect} className="w-4 h-4" />
               </button>
-              <div className=" flex items-center ml-1">
+              <div className=" flex flex-wrap items-center ml-2 lg:ml-1">
                 I accept the
                 <Link
                   to="https://survey2connect.com/terms-of-services/"
                   target="_blank"
                   rel="noreferrer"
-                  className="  ml-1 font-medium"
+                  className="  pl-1 font-medium"
                 >
-                  Terms of Services
+                  Terms of Services &  Services
                  
                 </Link>
-                <p className=" pl-1">&</p>
                 <Link
-                  to="https://survey2connect.com/privacy-policy-2021/"
+                  to="https://survey2connect.com/terms-of-services/"
                   target="_blank"
                   rel="noreferrer"
-                  className="= ml-1 font-medium"
+                  className="  pl-1 font-medium"
                 >
-             Services Privacy Policy
+                Privacy Policy
+                 
                 </Link>
+
               </div>
             </div>
 
