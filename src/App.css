@@ -1,62 +1,51 @@
-body{
-    background-color: rgb(238, 241, 255) ;
+body {
+  background-color: rgb(238, 241, 255);
 }
 
-.Login-Container{
-    box-shadow: -15px 25px 44px 0 rgba(126, 140, 214, .2);
-    padding: 20px 30px 35px;
-    border-radius: 10px;
+.Login-Container {
+  box-shadow: -15px 25px 44px 0 rgba(126, 140, 214, 0.2);
+  padding: 20px 30px 35px;
+  border-radius: 10px;
 }
-/* 
-.Auth_auth-card__82OWG {
-    box-shadow: -15px 25px 44px 0 rgba(126, 140, 214, .2);
-    padding: 20px 30px 35px;
-    border-radius: 10px;
-    width: 450px;
-    display: flex
-;
-    flex-direction: column;
-    gap: 15px;
-} */
- .login-title{
-        text-align: center;
-        letter-spacing: .52px;
-        /* line-height: 14px; */
- }
 
- .login-icon-btn{
-    display: flex ;
-    gap: 20px;
-    justify-content: center;
- }
+.login-title {
+  text-align: center;
+  letter-spacing: 0.52px;
+}
 
- input::placeholder {
-    color: rgb(212, 210, 210); /* Change this to your desired color */
-    opacity: 1;  /* Ensure full opacity */
+.login-icon-btn {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+}
+
+input::placeholder {
+  color: rgb(212, 210, 210);
+  opacity: 1;
 }
 
 .react-tel-input .form-control {
-    position: relative;
-    font-size: 14px;
-    letter-spacing: .01rem;
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    padding-left: 48px;
-    margin-left: 0;
-    background: #FFFFFF;
-    border: 1px solid #CACACA;
-    line-height: 25px;
-    height: 38px !important;
-    width: 100% !important;
-    outline: none;
-    border-radius: 0px !important;
+  position: relative;
+  font-size: 14px;
+  letter-spacing: 0.01rem;
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  padding-left: 48px;
+  margin-left: 0;
+  background: #ffffff;
+  border: 1px solid #cacaca;
+  line-height: 25px;
+  height: 38px !important;
+  width: 100% !important;
+  outline: none;
+  border-radius: 0px !important;
 }
 
 .react-tel-input .flag-dropdown {
-    border-radius: 0px !important;
-    background: #FFFFFF !important;
+  border-radius: 0px !important;
+  background: #ffffff !important;
 }
 
-.main-container{
-    height: calc(100vh - 60px);
+.main-container {
+  height: calc(100vh - 60px);
 }

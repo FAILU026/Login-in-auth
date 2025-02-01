@@ -6,11 +6,12 @@ import eyeOpen from "../assets/eye-visible-icon.svg";
 import "react-phone-input-2/lib/style.css";
 import PhoneInput from "react-phone-input-2";
 import { Link } from "react-router-dom";
-import select from '../assets/checkbox-selected-icon.svg';
-import unselect from '../assets/checkbox-unselected-icon.svg';
+import select from "../assets/checkbox-selected-icon.svg";
+import unselect from "../assets/checkbox-unselected-icon.svg";
 import { Tooltip } from "react-tooltip";
 import { useGoogleLogin } from "@react-oauth/google";
 import { toast, ToastContainer } from "react-toastify";
+
 const CreateAccount = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
@@ -32,7 +33,7 @@ const CreateAccount = () => {
       newErrors.phone = "Phone number is required";
       isValid = false;
       toast.error("Phone number is required");
-    }else if (phone.length < 10) {
+    } else if (phone.length < 10) {
       newErrors.phone = "Enter Valid Phone Number";
       isValid = false;
       toast.error("Enter Valid Phone Number");
@@ -76,17 +77,20 @@ const CreateAccount = () => {
 
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
-      console.log('Google Auth Success:', tokenResponse);
-            try {
-        const userInfo = await axios.get('https://www.googleapis.com/oauth2/v3/userinfo', {
-          headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
-        });
-        console.log('User Info:', userInfo.data);
+      console.log("Google Auth Success:", tokenResponse);
+      try {
+        const userInfo = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: { Authorization: `Bearer ${tokenResponse.access_token}` },
+          }
+        );
+        console.log("User Info:", userInfo.data);
       } catch (error) {
-        console.error('Error fetching user info:', error);
+        console.error("Error fetching user info:", error);
       }
     },
-    onError: () => console.log('Google Auth Failed'),
+    onError: () => console.log("Google Auth Failed"),
   });
 
   return (
@@ -116,7 +120,6 @@ const CreateAccount = () => {
                   width="14"
                   height="14"
                   className="w-full h-full"
-                 
                 />
               </div>
               <span className=" text-[16px] font-medium">Google</span>
@@ -154,20 +157,25 @@ const CreateAccount = () => {
               </label>
               <input
                 type="name"
-                className={`w-full px-2 py-2 ${errors.name?"border-red-400":"border-gray-300"} border text-[rgb(85,85,85)]  text-[0.8125rem] outline-none transition-all`}
+                className={`w-full px-2 py-2 ${
+                  errors.name ? "border-red-400" : "border-gray-300"
+                } border text-[rgb(85,85,85)]  text-[0.8125rem] outline-none transition-all`}
                 value={name || ""}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="Enter Full Name"
               />
-          
             </div>
             <div className="flex flex-col gap-1">
-              <label className="text-[13px] font-medium text-[rgb(85,85,85)]">Phone Number</label>
+              <label className="text-[13px] font-medium text-[rgb(85,85,85)]">
+                Phone Number
+              </label>
               <PhoneInput
                 country={"in"}
                 value={phone}
                 onChange={setPhone}
-                inputClass={`w-full border ${errors.phone?"border-red-400":"border-gray-300"} rounded px-3 py-2 text-sm text-[rgb(85,85,85)] outline-none `}
+                inputClass={`w-full border ${
+                  errors.phone ? "border-red-400" : "border-gray-300"
+                } rounded px-3 py-2 text-sm text-[rgb(85,85,85)] outline-none `}
                 buttonClass="bg-white border-r border-gray-300"
               />
             </div>
@@ -177,12 +185,13 @@ const CreateAccount = () => {
               </label>
               <input
                 type="email"
-                className={`w-full px-2 py-2 border ${errors.email?"border-red-400":"border-gray-300"} text-[rgb(85,85,85)]  text-[0.8125rem] outline-none transition-all`}
+                className={`w-full px-2 py-2 border ${
+                  errors.email ? "border-red-400" : "border-gray-300"
+                } text-[rgb(85,85,85)]  text-[0.8125rem] outline-none transition-all`}
                 value={email || ""}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter Email Address"
               />
-             
             </div>
 
             <div>
@@ -190,11 +199,12 @@ const CreateAccount = () => {
                 Password
               </label>
               <div className="relative w-full " id="not-clickable">
-                
                 <input
                   type={showPassword ? "text" : "password"}
                   placeholder="Enter Password"
-                  className={`w-full h-[38px] px-2 border ${errors.password?"border-red-400":"border-gray-300"} outline-none text-[rgb(85,85,85)] text-[0.8125rem] tracking-wide `}
+                  className={`w-full h-[38px] px-2 border ${
+                    errors.password ? "border-red-400" : "border-gray-300"
+                  } outline-none text-[rgb(85,85,85)] text-[0.8125rem] tracking-wide `}
                   value={password || ""}
                   onChange={(e) => setPassword(e.target.value)}
                   id="password-input"
@@ -215,25 +225,29 @@ const CreateAccount = () => {
               {errors.password && (
                 <p className="text-red-500 text-xs mt-1">{errors.password}</p>
               )}
-               <Tooltip id="password-tooltip" place="top" effect="solid">
-    Password must include:
-    <ul className="list-disc pl-4">
-      <li>At least 10 characters</li>
-      <li>At least one number</li>
-      <li>One lowercase and one uppercase letter</li>
-      <li>One special character (@_$!%*#?&)</li>
-      <li>No character or number repeated more than twice</li>
-    </ul>
-  </Tooltip>
+              <Tooltip id="password-tooltip" place="top" effect="solid">
+                Password must include:
+                <ul className="list-disc pl-4">
+                  <li>At least 10 characters</li>
+                  <li>At least one number</li>
+                  <li>One lowercase and one uppercase letter</li>
+                  <li>One special character (@_$!%*#?&)</li>
+                  <li>No character or number repeated more than twice</li>
+                </ul>
+              </Tooltip>
             </div>
 
             <div className="flex items-center text-sm text-[rgb(85,85,85)]">
-            <button
+              <button
                 type="button"
                 className="w-4 h-4 flex   focus:outline-none"
                 onClick={() => setIsChecked(!isChecked)}
               >
-                <img alt="checkbox" src={isChecked ? select : unselect} className="w-4 h-4" />
+                <img
+                  alt="checkbox"
+                  src={isChecked ? select : unselect}
+                  className="w-4 h-4"
+                />
               </button>
               <div className=" flex flex-wrap items-center ml-2 lg:ml-1">
                 I accept the
@@ -243,8 +257,7 @@ const CreateAccount = () => {
                   rel="noreferrer"
                   className="  pl-1 font-medium"
                 >
-                  Terms of Services &  Services
-                 
+                  Terms of Services & Services
                 </Link>
                 <Link
                   to="https://survey2connect.com/terms-of-services/"
@@ -252,10 +265,8 @@ const CreateAccount = () => {
                   rel="noreferrer"
                   className="  pl-1 font-medium"
                 >
-                Privacy Policy
-                 
+                  Privacy Policy
                 </Link>
-
               </div>
             </div>
 
@@ -263,7 +274,7 @@ const CreateAccount = () => {
               type="submit"
               className="w-full text-[14px] bg-[#422ff0] text-white font-medium py-2.5 transition-colors cursor-pointer"
             >
-              Create  Account
+              Create Account
             </button>
           </form>
 
@@ -277,8 +288,7 @@ const CreateAccount = () => {
           </div>
         </div>
       </div>
-                  <ToastContainer position="bottom-right" autoClose={3000} />
-      
+      <ToastContainer position="bottom-right" autoClose={3000} />
     </div>
   );
 };
