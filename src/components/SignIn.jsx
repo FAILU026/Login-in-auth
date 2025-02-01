@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import googleImg from "../assets/google-icon.svg";
 import microsoftImg from "../assets/microsoft-icon.svg";
 import eyeHide from "../assets/eye-hide-icon.svg";
@@ -15,7 +15,7 @@ const SignIn = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({ email: "", password: "" });
-
+  const [currentError, setCurrentError] = useState("")
   
   const login = useGoogleLogin({
     onSuccess: async (tokenResponse) => {
@@ -33,6 +33,12 @@ const SignIn = () => {
   });
 
 
+  useEffect(() => {
+    if (currentError) {
+      toast.error(currentError);
+    }
+  }, [currentError]);
+
   const validateEmail = (value) => {
     if (!value.trim()) {
       return "Email is required";
@@ -40,15 +46,6 @@ const SignIn = () => {
       return "Invalid email format";
     }
     return "";
-  };
-
-  const handleEmailChange = (e) => {
-    const value = e.target.value;
-    setEmail(value);
-    setErrors((prev) => ({ ...prev, email: validateEmail(value) }));
-    if (errorMsg) {
-      toast.error(errorMsg);
-    }
   };
 
   const validatePassword = (value) => {
@@ -60,32 +57,49 @@ const SignIn = () => {
     return "";
   };
 
+  const handleEmailChange = (e) => {
+    const value = e.target.value;
+    setEmail(value);
+    const errorMsg = validateEmail(value);
+    setErrors((prev) => ({ ...prev, email: errorMsg }));
+    if (!currentError || errorMsg === currentError) {
+      setCurrentError(errorMsg);
+    }
+  };
+
   const handlePasswordChange = (e) => {
     const value = e.target.value;
     setPassword(value);
-    setErrors((prev) => ({ ...prev, password: validatePassword(value) }));
-    if (errorMsg) {
-      toast.error(errorMsg);
+    const errorMsg = validatePassword(value);
+    setErrors((prev) => ({ ...prev, password: errorMsg }));
+    if (!currentError || errorMsg === currentError) {
+      setCurrentError(errorMsg);
     }
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
+  
     const emailError = validateEmail(email);
-    const passwordError = validatePassword(password);
-
-    setErrors({ email: emailError, password: passwordError });
-
-    if (emailError) toast.error(emailError);
-    if (passwordError) toast.error(passwordError);
-
-    if (!emailError && !passwordError) {
-      toast.success("Logged in successfully!");
-      console.log("Form submitted:", { email, password });
-      setEmail("");
-      setPassword("");
+    if (emailError) {
+      setErrors({ email: emailError, password: "" });
+      toast.error(emailError);
+      return; // Stop further validation
     }
+  
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+      setErrors({ email: "", password: passwordError });
+      toast.error(passwordError);
+      return; // Stop further validation
+    }
+  
+    setErrors({ email: "", password: "" });
+    toast.success("Logged in successfully!");
+    console.log("Form submitted:", { email, password });
+    setEmail("");
+    setPassword("");
   };
-
   return (
     <div>
       <div className="h-[100vh]  flex items-center justify-center p-4 Login">
